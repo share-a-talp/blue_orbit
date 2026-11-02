@@ -1,0 +1,19 @@
+/*
+  스타일 진입점 — 레이어 순서와 import만 둔다.
+  global/ : 전체 스타일 (토큰·리셋·기본·레이아웃·컴포넌트·유틸)
+  menu/   : 메뉴 스타일 (GNB·모바일 드로어·푸터 링크)
+*/
+@layer reset, base, layout, components, menu, utilities;
+
+@import "./global/tokens.css";
+@import "./global/reset.css" layer(reset);
+@import "./global/base.css" layer(base);
+@import "./global/layout.css" layer(layout);
+@import "./global/components.css" layer(components);
+
+@import "./menu/menu-tokens.css";
+@import "./menu/gnb.css" layer(menu);
+@import "./menu/mobile-drawer.css" layer(menu);
+@import "./menu/footer-nav.css" layer(menu);
+
+@import "./global/utilities.css" layer(utilities);

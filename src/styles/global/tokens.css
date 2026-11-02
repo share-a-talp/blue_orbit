@@ -1,0 +1,83 @@
+/*
+  디자인 토큰 — 색·폰트·간격은 여기서만 정의한다.
+  브레이크포인트(미디어쿼리에는 변수를 못 쓰므로 아래 값을 그대로 사용):
+    lg ≤ 1024px · md ≤ 768px · sm ≤ 480px
+*/
+:root {
+  /* brand */
+  --c-blue: #0b3fa8;        /* marvel blue — 주색 */
+  --c-blue-deep: #072a70;
+  --c-blue-soft: #e8eefb;
+  --c-neon: #39ff14;        /* neon green — 포인트, 어두운 배경 위에서만 */
+  --c-gold: #c9a227;        /* #FFD700 톤다운 — 숫자·배지·구분선 */
+  --c-black: #0a0a0a;
+  --c-space: #020b1d;       /* 로고·배경 이미지의 우주 남색 */
+  --c-white: #ffffff;
+
+  /* neutral */
+  --c-gray-50: #f6f7f9;
+  --c-gray-100: #eef0f3;
+  --c-gray-200: #e3e6eb;
+  --c-gray-400: #9aa1ad;
+  --c-gray-500: #6b7280;
+  --c-gray-700: #374151;
+  --c-gray-900: #111827;
+
+  /* semantic */
+  --c-text: var(--c-gray-900);
+  --c-text-muted: var(--c-gray-500);
+  --c-bg: var(--c-white);
+  --c-bg-alt: var(--c-gray-50);
+  --c-line: var(--c-gray-200);
+  --c-link: var(--c-blue);
+  --c-danger: #c62828;
+  --c-success: #1b7f3b;
+
+  /* type */
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.75rem;
+  --lh-tight: 1.25;
+  --lh-body: 1.7;
+
+  /* space */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* shape */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 6px 20px rgb(0 0 0 / 0.08);
+
+  /* layout */
+  --container: 1200px;
+  --gutter: 24px;
+
+  /* layers */
+  --z-header: 100;
+  --z-dim: 190;
+  --z-drawer: 200;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --gutter: 16px;
+    --fs-3xl: 2rem;
+    --fs-2xl: 1.625rem;
+  }
+}

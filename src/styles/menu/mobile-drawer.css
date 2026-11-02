@@ -1,0 +1,82 @@
+/* 모바일 메뉴 — 오른쪽 슬라이드 드로어 + 배경 딤 */
+
+.drawer-dim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dim);
+  background: var(--drawer-dim);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+  width: var(--drawer-width);
+  padding: var(--sp-4) var(--sp-5) var(--sp-6);
+  background: var(--drawer-bg);
+  color: var(--drawer-text);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.25s ease, visibility 0.25s;
+}
+
+body.is-menu-open {
+  overflow: hidden;
+}
+
+body.is-menu-open .drawer-dim {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.is-menu-open .drawer {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.drawer__close {
+  align-self: flex-end;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--drawer-text);
+}
+
+.drawer__list {
+  margin-top: var(--sp-5);
+}
+
+.drawer__link {
+  display: block;
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--drawer-text);
+  text-decoration: none;
+}
+
+.drawer__link:hover { text-decoration: none; }
+
+.drawer__link.is-active {
+  color: var(--drawer-active);
+}
+
+.drawer__foot {
+  margin-top: auto;
+  font-size: var(--fs-xs);
+  color: var(--c-gray-400);
+}
+
+@media (min-width: 769px) {
+  .drawer,
+  .drawer-dim { display: none; }
+}

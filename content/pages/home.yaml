@@ -1,0 +1,25 @@
+# 홈 — 회사 소개와 사업영역 안내. "[PH]" 는 플레이스홀더.
+hero:
+  eyebrow: "[PH] BLUE ORBIT"
+  title: "[PH] 아이디어가 시장의 궤도에 오르기까지"
+  lead: "[PH] 블루오빗이 어떤 회사인지 두세 문장으로 소개합니다."
+  primary: { label: 사업영역 보기, to: /market }
+
+about:
+  title: "[PH] 블루오빗은"
+  text: "[PH] 회사 소개 본문입니다. 설립 배경, 일하는 방식, 지향점을 적어 주세요."
+
+areas:
+  title: 사업영역
+  intro: "[PH] 두 가지 영역에서 컨설팅을 제공합니다."
+  items:
+    - title: 고객과 시장
+      en: Customer & Market
+      desc: "[PH] 고객과 시장을 검증합니다. PoC, PMF 등."
+      tags: [PoC, PMF]
+      to: /market
+    - title: 사업과 분석
+      en: Business & Analysis
+      desc: "[PH] 사업 모델과 수익 모델을 설계·분석합니다."
+      tags: [BM, RM]
+      to: /business

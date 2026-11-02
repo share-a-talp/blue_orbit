@@ -1,0 +1,26 @@
+/* 메뉴 전용 변수 — 값은 global 토큰을 참조한다 */
+:root {
+  --menu-height: 68px;
+  --menu-bg: rgb(2 11 29 / 0.88); /* --c-space 반투명: 로고 배경과 맞춤 */
+  --menu-border: rgb(255 255 255 / 0.08);
+  --menu-text: var(--c-gray-200);
+  --menu-text-hover: var(--c-white);
+  --menu-active: var(--c-white);
+  --menu-indicator: var(--c-neon);
+  --menu-logo: var(--c-white);
+
+  --drawer-width: min(320px, 85vw);
+  --drawer-bg: var(--c-space);
+  --drawer-text: var(--c-white);
+  --drawer-active: var(--c-neon);
+  --drawer-dim: rgb(0 0 0 / 0.5);
+
+  --fnav-text: var(--c-text-muted);
+  --fnav-text-hover: var(--c-blue);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --menu-height: 56px;
+  }
+}

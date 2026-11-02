@@ -1,0 +1,113 @@
+/* 데스크톱 상단 메뉴 (GNB) */
+
+.gnb {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  height: var(--menu-height);
+  background: var(--menu-bg);
+  border-bottom: 1px solid var(--menu-border);
+  backdrop-filter: saturate(180%) blur(8px);
+}
+
+.gnb__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.gnb__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--menu-logo);
+  text-decoration: none;
+}
+
+.gnb__logo:hover { text-decoration: none; }
+
+.gnb__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.gnb__list {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+}
+
+.gnb__link {
+  position: relative;
+  display: inline-block;
+  padding-block: var(--sp-2);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--menu-text);
+  text-decoration: none;
+}
+
+.gnb__link:hover {
+  color: var(--menu-text-hover);
+  text-decoration: none;
+}
+
+.gnb__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--menu-indicator);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+
+.gnb__link.is-active {
+  color: var(--menu-active);
+  font-weight: 600;
+}
+
+.gnb__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* 햄버거 버튼은 모바일에서만 */
+.gnb__toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.gnb__toggle-bar,
+.gnb__toggle-bar::before,
+.gnb__toggle-bar::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--menu-logo);
+  position: relative;
+}
+
+.gnb__toggle-bar::before,
+.gnb__toggle-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.gnb__toggle-bar::before { top: -6px; }
+.gnb__toggle-bar::after { top: 6px; }
+
+@media (max-width: 768px) {
+  .gnb__list { display: none; }
+  .gnb__toggle { display: inline-flex; }
+}

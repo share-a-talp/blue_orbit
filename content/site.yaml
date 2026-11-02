@@ -1,0 +1,16 @@
+# 사이트 공통 정보. "[PH]" 로 시작하는 값은 플레이스홀더 — 실제 문구로 교체하세요.
+name: 블루오빗
+tagline: "[PH] 회사 한 줄 소개"
+email: "contact@example.com"   # [PH] 실제 수신 주소로 교체 (mailto 대체 전송 시 사용)
+
+# 홈은 로고로 이동. 사업영역 2개 + 서브 3개
+nav:
+  - { label: 고객과 시장, to: /market }
+  - { label: 사업과 분석, to: /business }
+  - { label: 인사이트, to: /insights }
+  - { label: 히스토리, to: /history }
+  - { label: 문의, to: /contact }
+
+footer:
+  copyright: "© 블루오빗. All rights reserved."
+  rightsLine: "[PH] 본 사이트 게시물의 지식재산권은 블루오빗에 있습니다. (권리 고지 문구 확정 전)"

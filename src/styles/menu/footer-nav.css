@@ -1,0 +1,18 @@
+/* 푸터 링크 줄 — 문의 링크도 여기에 상시 노출 */
+
+.fnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+}
+
+.fnav__link {
+  font-size: var(--fs-sm);
+  color: var(--fnav-text);
+  text-decoration: none;
+}
+
+.fnav__link:hover {
+  color: var(--fnav-text-hover);
+  text-decoration: underline;
+}

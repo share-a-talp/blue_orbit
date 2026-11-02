@@ -1,0 +1,222 @@
+# Sveltia CMS 설정 — 사이트 문구·인사이트 글을 관리자 화면에서 편집한다.
+# 로컬: npm run dev → http://localhost:5173/admin/index.html → "Work with Local Repository" → 프로젝트 폴더 선택
+# 원격: GitHub 연결 후 repo 를 실제 저장소로 바꾸고, 로그인 화면에서 "Sign In with Token"(GitHub 토큰)으로 접속
+
+backend:
+  name: github
+  repo: share-a-talp/blue_orbit
+  branch: main
+
+# 업로드 이미지: public/media 에 저장, 글에는 /media/파일명 으로 기록
+media_folder: public/media
+public_folder: /media
+
+collections:
+  # ───────────────── 서브 1 — 인사이트(블로그 이관) ─────────────────
+  - name: insights
+    label: 인사이트 (블로그)
+    label_singular: 인사이트 글
+    description: 네이버 블로그 글을 옮겨 올리는 게시판입니다. 원본 증빙 정보(원문 주소·원 게시일·해시)를 함께 기록하세요.
+    folder: content/insights
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{fields.originalPublishedAt}}-{{fields.slug}}"
+    identifier_field: title
+    summary: "{{originalPublishedAt}} · [{{category}}] {{title}}"
+    sortable_fields: [originalPublishedAt, title, category]
+    fields:
+      - { label: 제목, name: title, widget: string }
+      - label: 주소(slug)
+        name: slug
+        widget: string
+        hint: "영문 소문자·숫자·하이픈만. 예: poc-checklist → /insights/poc-checklist"
+        pattern: ["^[a-z0-9-]+$", "영문 소문자, 숫자, 하이픈(-)만 쓸 수 있습니다."]
+      - label: 분류
+        name: category
+        widget: select
+        options: [PoC, PMF, BM, RM, 기타]
+      - { label: 목록 요약, name: summary, widget: text, required: false }
+      - { label: 본문, name: body, widget: markdown }
+      - label: 공개 보류(초안)
+        name: draft
+        widget: boolean
+        default: true
+        hint: 켜 두면 사이트에 보이지 않습니다. 검토가 끝나면 끄세요.
+      - { label: 원문 주소, name: originalUrl, widget: string, required: false, hint: "네이버 블로그 원문 URL" }
+      - label: 원 게시일
+        name: originalPublishedAt
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: 이관일
+        name: migratedAt
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+        default: "{{now}}"
+      - { label: 작성자, name: author, widget: string, required: false }
+      - { label: 원본 파일명, name: sourceFile, widget: string, required: false, hint: "예: 2021-03-14_원고.hwp" }
+      - label: 원본 해시
+        name: sourceHash
+        widget: string
+        required: false
+        hint: "원본 파일의 sha256. 터미널에서 npm run new-post 로 만들거나 certutil -hashfile 파일 SHA256 으로 계산"
+      - label: 권리 고지
+        name: rights
+        widget: string
+        required: false
+        default: "[PH] 권리 고지"
+
+  # ───────────────── 페이지 문구 ─────────────────
+  - name: pages
+    label: 페이지 문구
+    description: 주요 페이지와 사이트 공통 문구입니다.
+    files:
+      - name: home
+        label: 홈
+        file: content/pages/home.yaml
+        fields:
+          - label: 상단(Hero)
+            name: hero
+            widget: object
+            fields:
+              - { label: 작은 제목, name: eyebrow, widget: string, required: false }
+              - { label: 큰 제목, name: title, widget: string }
+              - { label: 소개 문장, name: lead, widget: text, required: false }
+              - label: 버튼
+                name: primary
+                widget: object
+                required: false
+                fields:
+                  - { label: 버튼 글자, name: label, widget: string }
+                  - { label: 이동 경로, name: to, widget: string, hint: "예: /market" }
+          - label: 회사 소개
+            name: about
+            widget: object
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: 본문, name: text, widget: text }
+          - label: 사업영역 카드
+            name: areas
+            widget: object
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: 소개, name: intro, widget: text, required: false }
+              - label: 카드
+                name: items
+                widget: list
+                fields:
+                  - { label: 영역명, name: title, widget: string }
+                  - { label: 영문명, name: en, widget: string, required: false }
+                  - { label: 설명, name: desc, widget: text }
+                  - { label: 태그, name: tags, widget: list, required: false, hint: "예: PoC, PMF" }
+                  - { label: 이동 경로, name: to, widget: string, hint: "/market 또는 /business" }
+
+      - name: market
+        label: 사업영역 — 고객과 시장 (PoC / PMF 등)
+        file: content/pages/market.yaml
+        fields: &serviceAreaFields
+          - label: 상단(Hero)
+            name: hero
+            widget: object
+            fields:
+              - { label: 작은 제목(영문), name: eyebrow, widget: string, required: false }
+              - { label: 큰 제목, name: title, widget: string }
+              - { label: 소개 문장, name: lead, widget: text, required: false }
+          - label: 제공 서비스
+            name: services
+            widget: object
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: 소개, name: intro, widget: text, required: false }
+              - label: 서비스
+                name: items
+                widget: list
+                fields:
+                  - { label: 약칭, name: code, widget: string, hint: "예: PoC, PMF, BM, RM" }
+                  - { label: 서비스명, name: title, widget: string }
+                  - { label: 설명, name: desc, widget: text }
+                  - { label: 제공 내용, name: points, widget: list, required: false }
+          - label: 진행 방식
+            name: process
+            widget: object
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - label: 단계
+                name: steps
+                widget: list
+                fields:
+                  - { label: 단계명, name: title, widget: string }
+                  - { label: 설명, name: desc, widget: text }
+
+      - name: business
+        label: 사업영역 — 사업과 분석 (BM / RM 컨설팅)
+        file: content/pages/business.yaml
+        fields: *serviceAreaFields
+      - name: site
+        label: 사이트 공통 (회사명·메일·푸터)
+        file: content/site.yaml
+        fields:
+          - { label: 회사명, name: name, widget: string }
+          - { label: 한 줄 소개, name: tagline, widget: string }
+          - label: 문의 수신 메일
+            name: email
+            widget: string
+            hint: 메일 전송 서비스를 쓰지 않을 때(mailto) 문의가 이 주소로 갑니다.
+          - label: 메뉴
+            name: nav
+            widget: list
+            hint: 이동 경로(to)는 개발과 맞춰야 하므로 글자만 바꾸세요.
+            fields:
+              - { label: 메뉴 이름, name: label, widget: string }
+              - { label: 이동 경로, name: to, widget: string }
+          - label: 푸터
+            name: footer
+            widget: object
+            fields:
+              - { label: 저작권 표기, name: copyright, widget: string }
+              - { label: 권리 고지 한 줄, name: rightsLine, widget: string }
+
+  # ───────────────── 서브 2 — 히스토리 ─────────────────
+  - name: history
+    label: 히스토리
+    files:
+      - name: history
+        label: 커리어 히스토리
+        file: content/history.yaml
+        fields:
+          - label: 항목
+            name: items
+            widget: list
+            summary: "{{fields.period}} · {{fields.org}}"
+            fields:
+              - { label: 연도(필터용), name: year, widget: number, value_type: int }
+              - { label: 기간, name: period, widget: string, hint: "예: 2024.03 – 2025.12" }
+              - { label: 소속 / 프로젝트, name: org, widget: string }
+              - { label: 역할, name: role, widget: string }
+              - { label: 요약, name: summary, widget: text, required: false }
+
+  # ───────────────── 지식재산권 고지 (플레이스홀더) ─────────────────
+  - name: legal
+    label: 권리 고지
+    files:
+      - name: ip-notice
+        label: 지식재산권 및 권리 고지
+        file: content/legal/ip-notice.md
+        description: >-
+          [PH] 추가 자료를 받아 확정할 문서입니다. 확정할 항목 —
+          1) 저작권(지식재산권) 보유 주체와 범위,
+          2) 원 게시물 대비 이관본의 동일성 보증 방식(sourceHash 등),
+          3) 분쟁·재판 시 증거 활용 권한과 기록 보존 방침,
+          4) 무단 전재·재배포 고지.
+          본문은 인사이트 글 하단 "원본·권리 정보" 박스에 표시됩니다.
+        fields:
+          - { label: 제목, name: title, widget: string }
+          - label: 상태
+            name: status
+            widget: select
+            options: [placeholder, draft, final]
+          - { label: 본문, name: body, widget: markdown }

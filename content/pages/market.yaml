@@ -1,0 +1,32 @@
+# 사업영역 1 — 고객과 시장 (PoC / PMF 등). "[PH]" 는 플레이스홀더.
+hero:
+  eyebrow: "Customer & Market"
+  title: 고객과 시장
+  lead: "[PH] 아이디어가 실제 고객과 시장에서 통하는지 검증합니다."
+
+services:
+  title: 제공 서비스
+  intro: "[PH] 영역 소개 문장."
+  items:
+    - code: PoC
+      title: "개념 검증"
+      desc: "[PH] PoC 컨설팅 설명."
+      points:
+        - "[PH] 제공 내용 1"
+        - "[PH] 제공 내용 2"
+        - "[PH] 제공 내용 3"
+    - code: PMF
+      title: "시장 적합성 검증"
+      desc: "[PH] PMF 컨설팅 설명."
+      points:
+        - "[PH] 제공 내용 1"
+        - "[PH] 제공 내용 2"
+        - "[PH] 제공 내용 3"
+
+process:
+  title: 진행 방식
+  steps:
+    - { title: "[PH] 진단", desc: "[PH] 단계 설명" }
+    - { title: "[PH] 설계", desc: "[PH] 단계 설명" }
+    - { title: "[PH] 검증", desc: "[PH] 단계 설명" }
+    - { title: "[PH] 보고", desc: "[PH] 단계 설명" }

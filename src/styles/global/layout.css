@@ -1,0 +1,122 @@
+/* 페이지 골격: 컨테이너, 섹션, 그리드, 푸터 */
+
+.bo-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.bo-main {
+  flex: 1;
+}
+
+.bo-container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.bo-section {
+  padding-block: var(--sp-9);
+}
+
+.bo-section--alt {
+  background: var(--c-bg-alt);
+}
+
+.bo-section--dark {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.bo-section__head {
+  max-width: 720px;
+  margin-bottom: var(--sp-7);
+}
+
+.bo-section__title {
+  margin-bottom: var(--sp-3);
+}
+
+.bo-section__intro {
+  color: var(--c-text-muted);
+  font-size: var(--fs-lg);
+}
+
+.bo-section--dark .bo-section__intro {
+  color: var(--c-gray-400);
+}
+
+.bo-grid {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.bo-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.bo-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.bo-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* 서브(게시판형) 페이지 머리 */
+.bo-subhead {
+  padding-block: var(--sp-8) var(--sp-6);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.bo-subhead__title {
+  font-size: var(--fs-2xl);
+}
+
+.bo-subhead__desc {
+  margin-top: var(--sp-2);
+  color: var(--c-text-muted);
+}
+
+.bo-subbody {
+  padding-block: var(--sp-6) var(--sp-9);
+}
+
+/* footer (simple) */
+.bo-footer {
+  border-top: 1px solid var(--c-line);
+  background: var(--c-bg-alt);
+  padding-block: var(--sp-6);
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+}
+
+.bo-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3) var(--sp-5);
+}
+
+.bo-footer__brand {
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.bo-footer__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.bo-footer__rights {
+  font-size: var(--fs-xs);
+}
+
+@media (max-width: 1024px) {
+  .bo-grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .bo-section { padding-block: var(--sp-8); }
+}
+
+@media (max-width: 768px) {
+  .bo-grid--2,
+  .bo-grid--3,
+  .bo-grid--4 { grid-template-columns: 1fr; }
+  .bo-section { padding-block: var(--sp-7); }
+  .bo-footer__inner { flex-direction: column; align-items: flex-start; }
+}
